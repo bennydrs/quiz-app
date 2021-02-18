@@ -71,29 +71,52 @@ body {
   color: #fff;
 }
 
-.next {
+.btn {
   background-color: #fca311;
   color: #fff;
   outline: none;
   padding: 1rem 2rem;
   border: none;
   border-radius: 20px;
-  margin: auto;
-  margin-top: 2rem;
   font-size: 1rem;
   font-weight: 600;
 }
 
-.next:hover {
+.btn:hover {
   background-color: #db8d0f;
   cursor: pointer;
 }
 
-.next:disabled {
+.next {
+  margin: auto;
+  margin-top: 2rem;
+}
+
+.btn.next:disabled {
   opacity: 0.6;
 }
 
-.next:disabled:hover {
+.btn.next:disabled:hover {
   background-color: #fca311;
   cursor: not-allowed;
+}
+
+.answered {
+  background: rgba(252, 163, 17, 0.2);
+}
+
+.answer:disabled:hover.answered {
+  background-color: rgba(252, 163, 17, 0.2);
+}
+
+.score_board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.start_again {
+  margin-top: 2rem;
+  width: 200px;
 }

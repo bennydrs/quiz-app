@@ -10,6 +10,7 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [showAnswers, setShowAnswers] = useState(false);
+  const [answered, setAnswered] = useState();
 
   useEffect(() => {
     fetch(API_URL)
@@ -28,6 +29,7 @@ function App() {
   }, []);
 
   const handleAnswer = (answer) => {
+    setAnswered(answer);
     if (!showAnswers) {
       // check answer
       if (answer === questions[currentIndex].correct_answer) {
@@ -44,17 +46,29 @@ function App() {
     setCurrentIndex(newIndex);
   };
 
+  const handleStartAgain = () => {
+    window.location.reload();
+  };
+
   return (
     <div className="App">
       {questions.length > 0 ? (
         <div className="container">
           {currentIndex >= questions.length ? (
-            <h1>Your score is {score}</h1>
+            <div className="score_board">
+              <h2>
+                Your score is {score}/{questions.length}
+              </h2>
+              <button className="btn start_again" onClick={handleStartAgain}>
+                Start Again
+              </button>
+            </div>
           ) : (
             <Questionaire
               data={questions[currentIndex]}
               showAnswers={showAnswers}
               handleAnswer={handleAnswer}
+              answered={answered}
               handleNextQuestion={handleNextQuestion}
             />
           )}

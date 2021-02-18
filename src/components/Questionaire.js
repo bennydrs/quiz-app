@@ -4,6 +4,7 @@ const Questionaire = ({
   handleAnswer,
   showAnswers,
   handleNextQuestion,
+  answered,
   data: { question, correct_answer, answers },
 }) => {
   return (
@@ -19,10 +20,12 @@ const Questionaire = ({
               : "incorrect"
             : "white";
 
+          const selected = answered === answer ? "answered" : "";
+
           return (
             <button
               key={i}
-              className={`answer ${bgColor}`}
+              className={`answer ${bgColor} ${selected}`}
               dangerouslySetInnerHTML={{ __html: answer }}
               onClick={() => handleAnswer(answer)}
               disabled={showAnswers}
@@ -31,7 +34,7 @@ const Questionaire = ({
         })}
         <button
           onClick={handleNextQuestion}
-          className="next"
+          className="btn next"
           disabled={!showAnswers}
         >
           Next
