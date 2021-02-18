@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import Loading from "./components/Loading/Loading";
 import Questionaire from "./components/Questionaire";
+import ScoreBoard from "./components/ScoreBoard";
 
 const API_URL =
   "https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple";
 
-function App() {
+const App = () => {
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [showAnswers, setShowAnswers] = useState(false);
-  const [answered, setAnswered] = useState();
+  const [answered, setAnswered] = useState("");
 
   useEffect(() => {
     fetch(API_URL)
@@ -46,23 +47,12 @@ function App() {
     setCurrentIndex(newIndex);
   };
 
-  const handleStartAgain = () => {
-    window.location.reload();
-  };
-
   return (
     <div className="App">
       {questions.length > 0 ? (
         <div className="container">
           {currentIndex >= questions.length ? (
-            <div className="score_board">
-              <h2>
-                Your score is {score}/{questions.length}
-              </h2>
-              <button className="btn start_again" onClick={handleStartAgain}>
-                Start Again
-              </button>
-            </div>
+            <ScoreBoard score={score} questions={questions.length} />
           ) : (
             <Questionaire
               data={questions[currentIndex]}
@@ -78,6 +68,6 @@ function App() {
       )}
     </div>
   );
-}
+};
 
 export default App;
